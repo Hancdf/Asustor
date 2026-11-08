@@ -1,0 +1,21 @@
+RPO ECO CPU 1.6.9 — November 6, 2026
+FIXES
+• Realtek 8188eu Support: Fixed an issue where reading sysfs speed for Realtek 8188eu (USB 0bda:8179) returned EINVAL. A read-only driver query confirmed a 150 Mbps speed on your NAS. Added this alternative Wi-Fi reading method as a fallback when sysfs fails.
+WIDGET HARDWARE REFRESH
+• Refresh Button: If the model or telemetry is unavailable, a compact "Refresh hardware" button will now appear.
+• Background Processing: It requests a re-detection from the active NAS service. The widget displays the waiting status and final confirmation without opening the main window.
+• Eco Analysis: This does not toggle the CPU mode or trigger automatic analysis. After refreshing the hardware specs, click "Eco Analysis" manually.
+• Hardware Inventory: The inventory automatically fetches available drive models, network adapters, USB IDs, and drivers. The system does not estimate power consumption (watts) for unknown hardware, as device discovery and its power model are separate things. The network coefficient (including Wi-Fi) remains an explicit uncalibrated assumption rather than an exact adapter measurement.
+INSTALLATION
+1. Go to App Central → Management → Manual Install.
+2. Select homecloud-cpu_1.6.9_x86-64.apk and install it over your current version (no need to uninstall RPO ECO CPU beforehand).
+3. After the installation completes, hard-refresh the ADM page using Ctrl+F5.
+4. Re-run "Eco Analysis" to build a new baseline.
+• Supported Firmware: ADM 5.1.4.RM62 / AS66, Python 3.12+.
+DATA PRESERVATION
+• Settings Retained: The energy formula, historical totals, tariffs, profiles, schedule, and CPU limitation scope remain unchanged.
+• Network & Data: NAS network configurations are not modified. Missing periods are not backfilled with fictional energy data.
+VERIFICATION
+• Tested Scenarios: Verified exactly three isolated use cases: Wi-Fi speed read/rescan; command authorization with zero CPU/energy changes; and widget recovery states in both RU/EN without window opening.
+• Package Review: Reviewed the compiled APK assets, including the CPU core, energy history, authorization, installer, firmware checks, and saved snapshots.
+• Status: A full legacy test suite was not executed. The update hasn't been deployed to a production NAS yet; the speed-reading logic is validated solely via your SSH output.
